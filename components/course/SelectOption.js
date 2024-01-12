@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SelectOption({data,name,value,onChangeHandler}) {
+export default function SelectOption({data,name,value,onChangeHandler,onBlurHandler}) {
   console.log(name,value)
 
   
@@ -11,6 +11,7 @@ export default function SelectOption({data,name,value,onChangeHandler}) {
       name={name}
       value={value}
       onChange={onChangeHandler}
+      onBlur={onBlurHandler}
       
        class="block appearance-none w-full bg-white border
         border-gray-300 text-gray-700 py-3 px-4 pr-8

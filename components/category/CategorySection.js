@@ -9,7 +9,8 @@ export default function CategorySection({
   onDelete,
   form,
   onEdit,
-  setEdit
+  setEdit,
+  isEdit
 }) {
 
   
@@ -26,6 +27,7 @@ export default function CategorySection({
           onSave={onSave}
           onEdit={onEdit}
           setEdit={setEdit}
+          isEdit={isEdit}
         />
 
         <CategoryForm onSave={onSave} value={form} />
