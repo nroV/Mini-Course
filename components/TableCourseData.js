@@ -4,7 +4,7 @@ import ButtonApp from "./ButtonApp";
 export default function TableCourseData({
   data,
   category,
-  onDelet,
+  onDelete,
   onEditing,
 }) {
   const [chapters] = data?.map((course) => course.chapters);

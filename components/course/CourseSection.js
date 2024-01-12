@@ -2,15 +2,20 @@ import React, { useState } from "react";
 import HeadLine from "../HeadLine";
 import TableCourseData from "../TableCourseData";
 import CourseForm from "./CourseForm";
-import { uuidv4 } from "@/app/utils/generate";
+import { uuidv4 } from "@/utils/generate";
 
 export default function CourseSection({ category, data, setData }) {
   const [editForm, setEditForm] = useState({});
+  const [isCourseEdit,setCourseEdit] = useState(false)
+ 
 
-  
 
   const onSaveData = (payload, isEdit) => {
+    console.log(payload)
+
+
     if (isEdit == true) {
+      
       setData((pre) =>
         pre.map((data) => {
           if (data.id === payload?.id) {
@@ -19,24 +24,36 @@ export default function CourseSection({ category, data, setData }) {
           return data;
         })
       );
+      setEditForm({})
+      setCourseEdit(false)
 
       return;
     }
-    setData((pre) => [...pre, payload]);
+    setData((pre) => [...pre, {
+      ...payload,
+      id:uuidv4()
+    }]);
   };
 
   const onDeleteData = (id) => {
     setData((pre) => pre.filter((data) => data?.id !== id));
   };
 
-  const onEditingCourse = (id, isEdit) => {
+  const onEditingCourse = (id) => {
 
-    if (isEdit == true) {
+    console.log(isCourseEdit)
+    setCourseEdit(pre=>!pre)
+    if (isCourseEdit === false) 
+    
+    {
+  
       const result = data?.find((course) => course.id === id);
       setEditForm(result);
+   
+ 
       return;
     }
-
+    // setCourseEdit(false)
     setEditForm({});
   };
 

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import ButtonApp from "./ButtonApp";
 
-export default function TableData({ data, onDelete, onEdit , onSave  }) {
+export default function TableData({ data, onDelete, onEdit  ,isEdit }) {
 
-  const [isEdit,setEdit] = useState(false)
+  // const [isEdit,setEdit] = useState(false)
  
+  // console.log(isEdit)
   return (
     <table class="table-auto bg-white shadow-md rounded-lg overflow-hidden">
       <thead>
@@ -26,8 +27,7 @@ export default function TableData({ data, onDelete, onEdit , onSave  }) {
                 <td class="py-2 px-4 border flex gap-2 justify-center">
                   <ButtonApp 
                   btnStyle="bg-primary600"
-                    onClick={()=>{
-                      setEdit(pre=>!pre)
+                    onClick={()=>{    
                       onEdit({
                         category,
                         isEdit:!isEdit

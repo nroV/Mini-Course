@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import LinkBar from "./components/LinkBar";
-import HeadLine from "./components/HeadLine";
-import CategorySection from "./components/category/CategorySection";
-import CourseSection from "./components/course/CourseSection";
+import LinkBar from "../components/LinkBar";
+import HeadLine from "../components/HeadLine";
+import CategorySection from "../components/category/CategorySection";
+import CourseSection from "../components/course/CourseSection";
 import { useState } from "react";
-import { uuidv4 } from "./utils/generate";
+import { uuidv4 } from "../utils/generate";
 
 export default function Home() {
   const [listCategories, setCategories] = useState([
@@ -27,7 +27,7 @@ export default function Home() {
       code: "311",
     },
   ]);
-
+  const [isEditCategory, setEditCategory] = useState(false);
   const [form, setForm] = useState({
     id: "",
     name: "",
@@ -140,10 +140,9 @@ export default function Home() {
           ],
         },
       ],
-    }
+    },
     // ... add more courses as needed
   ]);
-
 
   const onEditCategory = (params) => {
     console.log(params);
@@ -152,7 +151,7 @@ export default function Home() {
       name: "",
       code: "",
     });
-
+    setEditCategory((pre) => !pre);
     const isEdit = params?.isEdit;
     if (isEdit) {
       console.log("form is editing");
@@ -168,7 +167,6 @@ export default function Home() {
     }
   };
   const onSaveCategory = (params, isEdit) => {
-    console.log(params);
     setForm({
       id: "",
       name: "",
@@ -184,8 +182,11 @@ export default function Home() {
         })
       );
 
+      setEditCategory((pre) => !pre);
+      // setEdit(false);
       return;
     }
+
     setCategories((pre) => {
       const arr = pre.slice();
       arr.push({
@@ -195,6 +196,7 @@ export default function Home() {
       });
       return [...arr];
     });
+    setEditCategory(false);
   };
 
   const onDeleteCategory = (id) => {
@@ -211,6 +213,7 @@ export default function Home() {
           data={listCategories}
           onSave={onSaveCategory}
           onEdit={onEditCategory}
+          isEdit={isEditCategory}
           onDelete={onDeleteCategory}
           form={form}
         />
