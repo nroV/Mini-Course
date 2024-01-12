@@ -7,6 +7,8 @@ import { uuidv4 } from "@/app/utils/generate";
 export default function CourseSection({ category, data, setData }) {
   const [editForm, setEditForm] = useState({});
 
+  
+
   const onSaveData = (payload, isEdit) => {
     if (isEdit == true) {
       setData((pre) =>
