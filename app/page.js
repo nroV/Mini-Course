@@ -1,113 +1,225 @@
-import Image from 'next/image'
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import LinkBar from "./components/LinkBar";
+import HeadLine from "./components/HeadLine";
+import CategorySection from "./components/category/CategorySection";
+import CourseSection from "./components/course/CourseSection";
+import { useState } from "react";
+import { uuidv4 } from "./utils/generate";
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+  const [listCategories, setCategories] = useState([
+    {
+      id: "12835ce6-163e-402b-b500-5651fd4d8091",
+      name: "Mobile App",
+      code: "111",
+    },
+    {
+      id: "12835ce6-163e-402b-b500-5651fd4d8092",
+      name: "Web Developing",
+      code: "211",
+    },
+    {
+      id: "12835ce6-163e-402b-b500-5651fd4d8093",
+      name: "BackEnd",
+      code: "311",
+    },
+  ]);
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+  const [form, setForm] = useState({
+    id: "",
+    name: "",
+    code: "",
+  });
+
+  const [data, setData] = useState([
+    {
+      id: 10,
+      name: "The Baddy Course",
+      category_id: "12835ce6-163e-402b-b500-5651fd4d8093",
+      summary: "This is the best course",
+      chapters: [
+        {
+          id: 1,
+          name: "The Chapter Course",
+          summary: "This Chapter is so cool",
+          lessons: [
+            {
+              id: 1,
+              name: "The Lesson Course",
+              summary: "This Lesson is so cool",
+            },
+          ],
+        },
+        {
+          id: 2,
+          name: "The Chapter Course",
+          summary: "This Chapter is so cool",
+          lessons: [
+            {
+              id: 1,
+              name: "The Lesson Course",
+              summary: "This Lesson is so cool",
+            },
+          ],
+        },
+        {
+          id: 3,
+          name: "The Chapter Course",
+          summary: "This Chapter is so cool",
+          lessons: [
+            {
+              id: 1,
+              name: "The Lesson Course",
+              summary: "This Lesson is so cool",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 11,
+      name: "The Awesome Course",
+      category_id: "12835ce6-163e-402b-b500-5651fd4d8092",
+      summary: "An amazing course for learners",
+      chapters: [
+        {
+          id: 2,
+          name: "The Exciting Chapter",
+          summary: "Get ready for an exciting journey",
+          lessons: [
+            {
+              id: 2,
+              name: "The Exciting Lesson",
+              summary: "Discover new concepts and ideas",
+            },
+            {
+              id: 3,
+              name: "The Exciting Lesson",
+              summary: "Discover new concepts and ideas",
+            },
+          ],
+        },
+        {
+          id: 1,
+          name: "The Chapter Course",
+          summary: "This Chapter is so cool",
+          lessons: [
+            {
+              id: 1,
+              name: "The Lesson Course",
+              summary: "This Lesson is so cool",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 12,
+      name: "The Coding Course",
+      category_id: "12835ce6-163e-402b-b500-5651fd4d8092",
+      summary: "Unlock the world of coding",
+      chapters: [
+        {
+          id: 3,
+          name: "The Programming Chapter",
+          summary: "Master the art of programming",
+          lessons: [
+            {
+              id: 3,
+              name: "The Coding Lesson",
+              summary: "Hands-on coding experience",
+            },
+            {
+              id: 4,
+              name: "The Coding Lesson",
+              summary: "Hands-on coding experience",
+            },
+          ],
+        },
+      ],
+    }
+    // ... add more courses as needed
+  ]);
+
+
+  const onEditCategory = (params) => {
+    console.log(params);
+    setForm({
+      id: "",
+      name: "",
+      code: "",
+    });
+
+    const isEdit = params?.isEdit;
+    if (isEdit) {
+      console.log("form is editing");
+      setForm({
+        id: "",
+        name: "",
+        code: "",
+      });
+      setForm({ ...params.category });
+      //call on Save
+
+      return;
+    }
+  };
+  const onSaveCategory = (params, isEdit) => {
+    console.log(params);
+    setForm({
+      id: "",
+      name: "",
+      code: "",
+    });
+    if (isEdit == true) {
+      setCategories((pre) =>
+        pre.map((category, index, arr) => {
+          if (category.id === params?.id) {
+            category = params;
+          }
+          return category;
+        })
+      );
+
+      return;
+    }
+    setCategories((pre) => {
+      const arr = pre.slice();
+      arr.push({
+        id: uuidv4(),
+        name: params?.name,
+        code: params?.code,
+      });
+      return [...arr];
+    });
+  };
+
+  const onDeleteCategory = (id) => {
+    setCategories((pre) => pre.filter((category) => category?.id !== id));
+    setData((pre) => {
+      return pre.filter((data) => data.category_id !== id);
+    });
+  };
+
+  return (
+    <div className=" border-primary700 bg-primary300 ">
+      <div className="link-course w-full justify-center gap-9 mb-11 shadow-lg shadow-slate-300">
+        <CategorySection
+          data={listCategories}
+          onSave={onSaveCategory}
+          onEdit={onEditCategory}
+          onDelete={onDeleteCategory}
+          form={form}
+        />
+        <CourseSection
+          category={listCategories}
+          data={data}
+          setData={setData}
         />
       </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    </div>
+  );
 }
