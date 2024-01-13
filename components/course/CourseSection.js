@@ -41,19 +41,15 @@ export default function CourseSection({ category, data, setData }) {
 
   const onEditingCourse = (id) => {
 
-    console.log(isCourseEdit)
     setCourseEdit(pre=>!pre)
     if (isCourseEdit === false) 
     
     {
-  
       const result = data?.find((course) => course.id === id);
       setEditForm(result);
    
- 
       return;
     }
-    // setCourseEdit(false)
     setEditForm({});
   };
 

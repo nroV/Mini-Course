@@ -5,7 +5,7 @@ import ButtonApp from "../ButtonApp";
 import TextBox from "../TextBox";
 
 import { uuidv4 } from "@/utils/generate";
-import { ErrorMessage, FieldArray, Formik } from "formik";
+import { ErrorMessage, FieldArray, Formik , useFormikContext} from "formik";
 
 export  function LessonsForm({
     chapterIndex,
@@ -15,6 +15,9 @@ export  function LessonsForm({
     push,
     remove
 }) {
+
+  const formik = useFormikContext();
+  console.log(formik)
   return (
     <>
     <main
@@ -33,8 +36,8 @@ shadow-slate-300 mb-12"
           placeholder="Enter Lesson Name"
           value={lesson.name}
           name={`chapters.${chapterIndex}.lessons.${lessonindex}.name`}
-          onChangeHandler={props.handleChange}
-          onBlurHandler={props.handleBlur}
+          onChangeHandler={formik.handleChange}
+          onBlurHandler={formik.handleBlur}
         />
         <ErrorMessage
           name={`chapters.${chapterIndex}.lessons.${lessonindex}.name`}
@@ -45,8 +48,8 @@ shadow-slate-300 mb-12"
           placeholder="Write a short summary to your lesson"
           value={lesson.summary}
           name={`chapters.${chapterIndex}.lessons.${lessonindex}.summary`}
-          onChangeHandler={props.handleChange}
-          onBlurHandler={props.handleBlur}
+          onChangeHandler={formik.handleChange}
+          onBlurHandler={formik.handleBlur}
         />
         <ErrorMessage
           name={`chapters.${chapterIndex}.lessons.${lessonindex}.summary`}
