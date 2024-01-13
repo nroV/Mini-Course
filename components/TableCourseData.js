@@ -27,7 +27,7 @@ export default function TableCourseData({
       <tbody>
         {data?.map((course) => {
           const categoryname = category?.find(
-            (cate) => cate?.id === +course?.category_id
+            (cate) => cate?.id === course?.category_id
           )?.name;
 
           return (
@@ -36,7 +36,7 @@ export default function TableCourseData({
               <td class="py-2 px-4 border"> {course?.name}</td>
               <td class="py-2 px-4 border"> {course?.summary}</td>
               <td class="py-2 px-4 border">
-                {course?.category_id} / {categoryname}
+               {categoryname}
               </td>
               <td class="py-2 px-4 border text-sm">
                 {course?.tags?.map((tag,index) => 
