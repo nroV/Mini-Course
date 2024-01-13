@@ -36,7 +36,7 @@ shadow-slate-300 mb-12"
           placeholder="Enter Lesson Name"
           value={lesson.name}
           name={`chapters.${chapterIndex}.lessons.${lessonindex}.name`}
-          onChangeHandler={formik.handleChange}
+          onChangeHandler={formik.handleChange} 
           onBlurHandler={formik.handleBlur}
         />
         <ErrorMessage

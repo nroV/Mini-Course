@@ -18,6 +18,7 @@ export default function TableCourseData({
           <th class="py-2 px-4 border">Name</th>
           <th class="py-2 px-4 border">Summarizes</th>
           <th class="py-2 px-4 border">Category Id </th>
+          <th class="py-2 px-4 border">Tag </th>
           <th class="py-2 px-4 border">Total Chapters</th>
           <th class="py-2 px-4 border">Total Lessons</th>
           <th class="py-2 px-4 border">Action</th>
@@ -37,6 +38,11 @@ export default function TableCourseData({
               <td class="py-2 px-4 border">
                 {course?.category_id} / {categoryname}
               </td>
+              <td class="py-2 px-4 border text-sm">
+                {course?.tags?.map((tag,index) => 
+                  <pre className="text-sm font-semibold" key={index}>#{tag} </pre>
+                )}
+              </td>
               <td class="py-2 px-4 border"> {course?.chapters?.length} </td>
               <td class="py-2 px-4 border">
                 {course?.chapters?.reduce((sum, chapter) => {
@@ -47,7 +53,7 @@ export default function TableCourseData({
                 <ButtonApp
                   onClick={() => {
                     setEdit((pre) => !pre);
-                  
+
                     if (isEdit == false) {
                       onEditing(course?.id, !isEdit);
                       return;
@@ -59,7 +65,7 @@ export default function TableCourseData({
                 >
                   Edit
                 </ButtonApp>
-                <ButtonApp  
+                <ButtonApp
                   btnStyle={"bg-red-500"}
                   hoverStyle={"bg-blue-200"}
                   onClick={() => onDelete(course?.id)}

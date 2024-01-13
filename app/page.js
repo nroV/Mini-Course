@@ -40,6 +40,8 @@ export default function Home() {
       name: "The Baddy Course",
       category_id: "12835ce6-163e-402b-b500-5651fd4d8093",
       summary: "This is the best course",
+
+      tags: ["Web", "Mobile", "Network", "IT", "Other"],
       chapters: [
         {
           id: 1,
@@ -57,6 +59,7 @@ export default function Home() {
           id: 2,
           name: "The Chapter Course",
           summary: "This Chapter is so cool",
+
           lessons: [
             {
               id: 1,
@@ -84,6 +87,7 @@ export default function Home() {
       name: "The Awesome Course",
       category_id: "12835ce6-163e-402b-b500-5651fd4d8092",
       summary: "An amazing course for learners",
+      tags:['Web','Mobile','Network'],
       chapters: [
         {
           id: 2,
@@ -119,6 +123,7 @@ export default function Home() {
     {
       id: 12,
       name: "The Coding Course",
+      tags:['Mobile','Network','IT','Other'],
       category_id: "12835ce6-163e-402b-b500-5651fd4d8092",
       summary: "Unlock the world of coding",
       chapters: [

@@ -3,8 +3,8 @@ import Textinput from "../Textinput";
 import ButtonApp from "../ButtonApp";
 import { Formik, Form, Field, ErrorMessage, useFormik } from "formik";
 import { CategorySchema } from "@/schemas";
+import { CustomInputComponent } from "../CustomInputComponent";
 export default function CategoryForm({ onSave, value }) {
-  console.log(value);
   return (
     <div className="space-y-6 flex flex-row mx-20">
       <Formik
@@ -25,13 +25,12 @@ export default function CategoryForm({ onSave, value }) {
           }
 
           onSave(values, false);
-        
+
           // actions.resetForm()
         }}
       >
         {(props) => (
           <form onSubmit={props.handleSubmit} className="space-y-4 w-full">
-          
             <input
               hidden
               type="text"
@@ -39,40 +38,23 @@ export default function CategoryForm({ onSave, value }) {
               onChangeHandler={props.handleChange}
               onBlurHandler={props.handleBlur}
             />
-            <Textinput
-              label="Categorys"
+            <Field
               name="name"
-              placeholder="Enter Category Name"
+              label="Category Name"
               value={props.values.name}
-              onChangeHandler={props.handleChange}
-              onBlurHandler={props.handleBlur}
+              component={CustomInputComponent}
+              placeholder="Course Name"
             />
-            <ErrorMessage
-              name="name"
-              component={"div"}
-              className="text-red-500"
-            />
-            <Textinput
-              label="Code"
+
+            <Field
+              name="code"
+              label="Category Code"
               value={props.values.code}
+              component={CustomInputComponent}
               placeholder="Enter Category Code"
-              name="code"
-              onChangeHandler={props.handleChange}
-              onBlurHandler={props.handleBlur}
             />
-            {/* {props.errors.name && <div id="feedback">{props.errors.name}</div>} */}
-            <ErrorMessage
-              name="code"
-              component={"div"}
-              className="text-red-500"
-            />
-            <ButtonApp
-              btnStyle="bg-primary600"
-              type="submit"
-              // onClick={(e) =>
-              //   value?.id ? onSaveCategory(e, true) : onSaveCategory(e, false)
-              // }
-            >
+
+            <ButtonApp btnStyle="bg-primary600" type="submit">
               {value?.id ? "Update" : "Save"}
             </ButtonApp>
           </form>
