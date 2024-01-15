@@ -11,6 +11,10 @@ export const CourseSchema = Yup.object().shape({
   summary: Yup.string()
     .min(1, "summary must be at least 3 character ")
     .required(" Course Summary is Required *"),
+  tags: Yup.array()
+    .of(Yup.string())
+    .min(3, "Please Select More then 2")
+    .required("This is required"),
   category_id: Yup.string().required(" Course Category is Required *"),
   chapters: Yup.array().of(
     Yup.object().shape({
