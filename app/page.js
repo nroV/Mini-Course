@@ -210,6 +210,7 @@ export default function Home() {
       return pre.filter((data) => data.category_id !== id);
     });
   };
+  //I did it
 
   return (
     <div className=" border-primary700 bg-primary300 ">
