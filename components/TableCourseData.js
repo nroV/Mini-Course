@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import ButtonApp from "./ButtonApp";
+import { useSelector, useDispatch } from "react-redux";
+import { removeCourse } from "@/app/features/features/course/courseSlice";
 
 export default function TableCourseData({
   data,
@@ -8,8 +10,9 @@ export default function TableCourseData({
   onEditing,
 }) {
   const [chapters] = data?.map((course) => course.chapters);
-
+  const dispatch = useDispatch()
   const [isEdit, setEdit] = useState(false);
+  
   return (
     <table class="table-auto bg-white shadow-md rounded-lg overflow-hidden h-full m-10">
       <thead>
@@ -25,7 +28,7 @@ export default function TableCourseData({
         </tr>
       </thead>
       <tbody>
-        {data?.map((course) => {
+        {data?.map((course,index) => {
           const categoryname = category?.find(
             (cate) => cate?.id === course?.category_id
           )?.name;
@@ -68,7 +71,7 @@ export default function TableCourseData({
                 <ButtonApp
                   btnStyle={"bg-red-500"}
                   hoverStyle={"bg-blue-200"}
-                  onClick={() => onDelete(course?.id)}
+                  onClick={() => dispatch(removeCourse(index))}
                 >
                   Delete
                 </ButtonApp>

@@ -32,8 +32,8 @@ export const CustomMultipleSelect = ({
         // value={selectedValue || []}
         isMulti
         options={
-          !id
-            ? [
+          // !id ?
+             [
                 "Web",
                 "Mobile",
                 "UX and UI",
@@ -42,7 +42,7 @@ export const CustomMultipleSelect = ({
                 "IT",
                 "Other",
               ].map((tag) => ({ value: tag, label: tag }))
-            : data.map((tag) => ({ value: tag, label: tag }))
+            // : data.map((tag) => ({ value: tag, label: tag }))
         }
         onChange={(data) => {
           console.log(data?.map((d) => d.value));
