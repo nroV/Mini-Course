@@ -94,8 +94,12 @@ export default function CourseForm({ data, value ,onClear }) {
                       <ButtonApp type="submit" btnStyle={"bg-primary700"}>
                         {value?.id ? "Update Course" : "Save"}
                       </ButtonApp>
-                      <ButtonApp type="reset" btnStyle={"bg-primary500"}
-                      onClick={onClear}
+                      <ButtonApp type="button" btnStyle={"bg-primary500"}
+                      onClick={()=>{
+
+                        props.resetForm()
+                        onClear()
+                      }}
                       
                       >
                       Reset All

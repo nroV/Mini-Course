@@ -122,7 +122,6 @@ const courseReducer = createSlice({
   name: "course",
   reducers: {
     addCourse(state, action) {
-      console.log(action.payload);
       state.courses.push({
         ...action.payload.value,
         id: uuidv4(),
