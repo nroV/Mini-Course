@@ -5,13 +5,13 @@ import CategoryForm from "./CategoryForm";
 
 export default function CategorySection({
   data = [],
-  onSave,
-  onDelete,
   form,
   onEdit,
   setEdit,
-  isEdit
+  isEdit,
+  onClear
 }) {
+
 
   
   return (
@@ -23,14 +23,12 @@ export default function CategorySection({
       >
         <TableData
           data={data}
-          onDelete={onDelete}
-          onSave={onSave}
           onEdit={onEdit}
           setEdit={setEdit}
           isEdit={isEdit}
         />
 
-        <CategoryForm onSave={onSave} value={form} />
+        <CategoryForm value={form} onClear ={onClear} />
       </div>
     </div>
   );

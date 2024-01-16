@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import ButtonApp from "./ButtonApp";
-
+import { useSelector, useDispatch } from "react-redux";
+import { removeCategory } from "@/app/features/features/category/categorySlice";
 export default function TableData({ data, onDelete, onEdit  ,isEdit }) {
 
-  // const [isEdit,setEdit] = useState(false)
- 
-  // console.log(isEdit)
+  const dispatch = useDispatch()
   return (
     <table class="table-auto bg-white shadow-md rounded-lg overflow-hidden">
       <thead>
@@ -17,7 +16,7 @@ export default function TableData({ data, onDelete, onEdit  ,isEdit }) {
         </tr>
       </thead>
       <tbody>
-        {data?.map((category) => {
+        {data?.map((category,index) => {
           return (
             <>
               <tr class="hover:bg-gray-100 text-center" key={category?.id}>
@@ -36,7 +35,7 @@ export default function TableData({ data, onDelete, onEdit  ,isEdit }) {
                   >Edit</ButtonApp>
                   <ButtonApp btnStyle={"bg-red-500"} hoverStyle={"bg-blue-200"}
                   
-                  onClick={()=>onDelete(category?.id)}
+                  onClick={()=>dispatch(removeCategory(index))}
                   >
                     Delete
                   </ButtonApp>

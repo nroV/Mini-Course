@@ -14,6 +14,8 @@ import { CustomSelectInput } from "./CustomSelectComponent";
 import { DynamicChapters } from "../chapters/DynamicChapters";
 import { CustomTextAreaInput } from "../CustomTextareaComponent";
 import { CustomMultipleSelect } from "./CustomMultipleTextSelect";
+import { useSelector, useDispatch } from "react-redux";
+import { addCourse, updateCourse } from "@/app/features/features/course/courseSlice";
 
 const initialValues = {
   name: "",
@@ -36,18 +38,27 @@ const initialValues = {
   ],
 };
 
-export default function CourseForm({ data, onSave, value }) {
+
+
+export default function CourseForm({ data, value ,onClear }) {
   const handleSubmit = (values, actions) => {
     console.log(values);
     actions.resetForm();
     if (value?.id) {
     
-      onSave(values, true);
+      dispatch(updateCourse({
+        value:{...values},
+        id:value?.id
+      }))
+      onClear()
     } else {
-      onSave(values, false);
+      // onSave(values, false);
+      dispatch(addCourse({
+        value:{...values}
+      }))
     }
   };
-
+  const dispatch = useDispatch()
   return (
     <div className="space-y-6 flex flex-row mx-20">
       <Formik
@@ -57,8 +68,7 @@ export default function CourseForm({ data, onSave, value }) {
         onSubmit={handleSubmit}
       >
         {(props) => {
-          console.log(props);
-          console.log(props?.values?.tags)
+
           return (
             <form
               onSubmit={(e) => {
@@ -84,8 +94,12 @@ export default function CourseForm({ data, onSave, value }) {
                       <ButtonApp type="submit" btnStyle={"bg-primary700"}>
                         {value?.id ? "Update Course" : "Save"}
                       </ButtonApp>
-                      <ButtonApp type="reset" btnStyle={"bg-primary500"}>
-                        Reset
+                      <ButtonApp type="reset" btnStyle={"bg-primary500"}
+                      onClick={onClear}
+                      
+                      >
+                      Reset All
+                 
                       </ButtonApp>
                     </div>
                   </div>
@@ -115,12 +129,7 @@ export default function CourseForm({ data, onSave, value }) {
                   id = {value?.id}
                   label='Customize Your Tag'
                   data ={props?.values?.tags}
-                  
-                    // data={
-                    //   value?.id ? props?.values?.tags :
-                    
-                      
-                    //   }
+             
                     name={"tags"}
                     placeholder="Choose a Tag"
                     component={CustomMultipleSelect}

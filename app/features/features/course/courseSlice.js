@@ -1,48 +1,8 @@
-"use client";
+import { createSlice } from "@reduxjs/toolkit";
+import { uuidv4 } from "@/utils/generate";
 
-import Image from "next/image";
-import Link from "next/link";
-import LinkBar from "../components/LinkBar";
-import HeadLine from "../components/HeadLine";
-import CategorySection from "../components/category/CategorySection";
-import CourseSection from "../components/course/CourseSection";
-import { useState } from "react";
-import { uuidv4 } from "../utils/generate";
-
-import { useSelector, useDispatch } from "react-redux";
-export default function Home() {
-  const [listCategories, setCategories] = useState([
-    {
-      id: "12835ce6-163e-402b-b500-5651fd4d8091",
-      name: "Mobile App",
-      code: "111",
-    },
-    {
-      id: "12835ce6-163e-402b-b500-5651fd4d8092",
-      name: "Web Developing",
-      code: "211",
-    },
-    {
-      id: "12835ce6-163e-402b-b500-5651fd4d8093",
-      name: "BackEnd",
-      code: "311",
-    },
-  ]);
-
-  const categorySlice = useSelector((store) => store.categoryReducer);
- 
-  const courseSlice = useSelector((store) => store.courseReducer);
-
-
-  console.log(courseSlice)
-  const [isEditCategory, setEditCategory] = useState(false);
-  const [form, setForm] = useState({
-    id: "",
-    name: "",
-    code: "",
-  });
-
-  const [data, setData] = useState([
+const value = {
+  courses: [
     {
       id: 10,
       name: "The Baddy Course",
@@ -155,58 +115,33 @@ export default function Home() {
       ],
     },
     // ... add more courses as needed
-  ]);
-
-  const onEditCategory = (params) => {
-    console.log(params);
-    setForm({
-      id: "",
-      name: "",
-      code: "",
-    });
-    setEditCategory((pre) => !pre);
-    const isEdit = params?.isEdit;
-    if (isEdit) {
-      console.log("form is editing");
-      setForm({
-        id: "",
-        name: "",
-        code: "",
+  ],
+};
+const courseReducer = createSlice({
+  initialState: value,
+  name: "course",
+  reducers: {
+    addCourse(state, action) {
+      console.log(action.payload);
+      state.courses.push({
+        ...action.payload.value,
+        id: uuidv4(),
       });
-      setForm({ ...params.category });
-      //call on Save
+    },
+    removeCourse(state, action) {
+   
+      state.courses.splice(action.payload, 1);
+    },
+    updateCourse(state, action) {
+      state.courses = state.courses.map((courses) => {
+        if (courses.id === action.payload.id) {
+            courses = action.payload.value;
+        }
+        return courses;
+      });
+    },
+  },
+});
 
-      return;
-    }
-  };
-
-  const onClearCategoryForm = () => {
-    setEditCategory((pre) => !pre);
-    setForm({
-      id: "",
-      name: "",
-      code: "",
-    });
-  };
-
-  //I did it
-
-  return (
-    <div className=" border-primary700 bg-primary300 ">
-      <div className="link-course w-full justify-center gap-9 mb-11 shadow-lg shadow-slate-300">
-        <CategorySection
-          data={categorySlice.category}
-          onClear={onClearCategoryForm}
-          onEdit={onEditCategory}
-          isEdit={isEditCategory}
-          form={form}
-        />
-        <CourseSection
-          category={listCategories}
-          data={courseSlice.courses}
-          setData={setData}
-        />
-      </div>
-    </div>
-  );
-}
+export default courseReducer.reducer;
+export const { addCourse,removeCourse,updateCourse } = courseReducer.actions;

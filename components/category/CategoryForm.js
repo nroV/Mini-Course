@@ -3,8 +3,15 @@ import Textinput from "../Textinput";
 import ButtonApp from "../ButtonApp";
 import { Formik, Form, Field, ErrorMessage, useFormik } from "formik";
 import { CategorySchema } from "@/schemas";
+
+import { useSelector, useDispatch } from "react-redux";
+
 import { CustomInputComponent } from "../CustomInputComponent";
-export default function CategoryForm({ onSave, value }) {
+import { addCategory, updateCategory } from "@/app/features/features/category/categorySlice";
+export default function CategoryForm({ onSave, value,onClear }) {
+ const dispatch = useDispatch()
+
+ console.log(value)
   return (
     <div className="space-y-6 flex flex-row mx-20">
       <Formik
@@ -17,14 +24,29 @@ export default function CategoryForm({ onSave, value }) {
         validationSchema={CategorySchema}
         onSubmit={(values, actions) => {
           console.log(values, actions);
+     
           actions.resetForm();
-          console.log(value?.id);
+
+          console.log(value.id)
+       
+     
           if (values?.id) {
-            onSave(values, true);
+            dispatch(updateCategory({
+            id:values?.id,
+            name:values?.name,
+            code:values?.code
+          }))
+          onClear()
             return;
           }
+       
+          dispatch(addCategory({
+            //
+            name:values?.name,
+            code:values?.code
+          }))
+          // onSave(values, false);
 
-          onSave(values, false);
 
           // actions.resetForm()
         }}
