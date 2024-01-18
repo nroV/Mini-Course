@@ -6,28 +6,36 @@ import { uuidv4 } from "@/utils/generate";
 
 export default function CourseSection({ category, data, setData }) {
   const [editForm, setEditForm] = useState({});
-  const [isCourseEdit,setCourseEdit] = useState(false)
- 
+  const [isCourseEdit, setCourseEdit] = useState(false);
 
   const onClearCourseForm = () => {
-    setEditForm({})
-    setCourseEdit(false)
+    setEditForm({});
+    setCourseEdit(false);
   };
-
-
 
   const onEditingCourse = (id) => {
 
-    setCourseEdit(pre=>!pre)
-    if (isCourseEdit === false) 
-    
-    {
-      const result = data?.find((course) => course.id === id);
-      setEditForm(result);
-   
+    setCourseEdit(id);
+ 
+    if (isCourseEdit === id) {
+      setEditForm({});
+      setCourseEdit(false);
       return;
     }
-    setEditForm({});
+    const result = data?.find((course) => course.id === id);
+    setEditForm(result);
+
+
+    // setCourseEdit(pre=>!pre)
+    // if (isCourseEdit === false)
+
+    // {
+    //   const result = data?.find((course) => course.id === id);
+    //   setEditForm(result);
+
+    //   return;
+    // }
+    // setEditForm({});
   };
 
   return (
@@ -49,7 +57,6 @@ export default function CourseSection({ category, data, setData }) {
           setData={setData}
           value={editForm}
           onClear={onClearCourseForm}
-  
         />
       </div>
     </div>

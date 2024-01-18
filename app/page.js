@@ -30,11 +30,10 @@ export default function Home() {
   ]);
 
   const categorySlice = useSelector((store) => store.categoryReducer);
- 
+
   const courseSlice = useSelector((store) => store.courseReducer);
 
-
-  console.log(courseSlice)
+  console.log(courseSlice);
   const [isEditCategory, setEditCategory] = useState(false);
   const [form, setForm] = useState({
     id: "",
@@ -158,26 +157,18 @@ export default function Home() {
   ]);
 
   const onEditCategory = (params) => {
-    console.log(params);
-    setForm({
-      id: "",
-      name: "",
-      code: "",
-    });
-    setEditCategory((pre) => !pre);
-    const isEdit = params?.isEdit;
-    if (isEdit) {
-      console.log("form is editing");
+    setEditCategory(params?.category?.id);
+    if (isEditCategory === params?.category?.id) {
       setForm({
         id: "",
         name: "",
         code: "",
       });
-      setForm({ ...params.category });
-      //call on Save
-
+      setEditCategory(false);
       return;
     }
+
+    setForm({ ...params.category });
   };
 
   const onClearCategoryForm = () => {

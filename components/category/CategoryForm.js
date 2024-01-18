@@ -85,32 +85,4 @@ export default function CategoryForm({ onSave, value,onClear }) {
     </div>
   );
 }
-{
-  /* <form className="space-y-4 w-full">
-<h1 className="text-xl font-bold">New Categories</h1>
 
-<Textinput
-  label="Categorys"
-  name="name"
-  placeholder="Enter Category Name"
-  value={form.name}
-  onChangeHandler={onChange}
-/>
-
-<Textinput
-  label="Code"
-  value={form.code}
-  placeholder="Enter Category Code"
-  name="code"
-  onChangeHandler={onChange}
-/>
-<ButtonApp
-     btnStyle="bg-primary600"
-  onClick={(e) =>
-    value?.id ? onSaveCategory(e, true) : onSaveCategory(e, false)
-  }
->
-  {value?.id ? "Update" : "Save"}
-</ButtonApp>
-</form> */
-}
